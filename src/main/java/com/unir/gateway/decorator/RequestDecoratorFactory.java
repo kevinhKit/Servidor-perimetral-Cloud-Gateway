@@ -32,7 +32,7 @@ public class RequestDecoratorFactory {
         public ServerHttpRequestDecorator getDecorator(GatewayRequest request) {
             return switch (request.getTargetMethod().name().toUpperCase()) {
                 case "GET" -> new GetRequestDecorator(request);
-                case "POST" -> new PostRequestDecorator(request, objectMapper);
+                case "POST", "PUT", "PATCH", "DELETE" -> new PostRequestDecorator(request, objectMapper);
                 default -> throw new IllegalArgumentException("Invalid http method");
             };
         }

@@ -43,7 +43,7 @@ public class PostRequestDecorator extends ServerHttpRequestDecorator {
     @Override
     @NonNull
     public HttpMethod getMethod() {
-        return HttpMethod.POST;
+        return gatewayRequest.getTargetMethod();
     }
 
     /**
