@@ -1,5 +1,6 @@
 server:
   port: ${PORT:8762}
+  max-http-request-header-size: 16KB
 
 # Configuración de Eureka
 eureka:
@@ -22,6 +23,13 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: ms-books-catalogue
+          uri: lb://ms-books-catalogue
+          predicates:
+            - Path=/api/libros/**
+          filters:
+            - StripPrefix=0
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:
@@ -35,7 +43,6 @@ spring:
               - PUT
               - DELETE
               - PATCH
-
 
 # Actuator para monitoreo y ver rutas activas
 management:
