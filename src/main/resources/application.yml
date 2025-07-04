@@ -30,6 +30,14 @@ spring:
             - Path=/api/libros/**
           filters:
             - StripPrefix=0
+
+        - id: ms-books-payments
+          uri: lb://ms-books-payments
+          predicates:
+            - Path=/api/pedidos/**
+          filters:
+            - StripPrefix=0
+
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:
